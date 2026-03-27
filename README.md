@@ -1,13 +1,14 @@
 # next-template
 
-A production-ready Next.js template with quality tooling, accessibility, observability, and Vercel deployment.
+A production-ready Next.js template with a contact list app demonstrating Server Actions, role-based access, accessibility, and modern React 19 patterns.
 
 ## Tech Stack
 
 | Category | Tool |
 |----------|------|
-| Framework | [Next.js](https://nextjs.org) (App Router, TypeScript, Turbopack) |
-| Styling | [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) |
+| Framework | [Next.js 16](https://nextjs.org) (App Router, TypeScript, Turbopack) |
+| Styling | [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) (base-nova) |
+| State Management | [Zustand](https://zustand.docs.pmnd.rs) (client auth state with persistence) |
 | Formatting | [Biome](https://biomejs.dev) |
 | Linting | [ESLint](https://eslint.org) + [jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) + [eslint-config-biome](https://github.com/nickmccurdy/eslint-config-biome) |
 | Unit Testing | [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com) + [vitest-axe](https://github.com/chaance/vitest-axe) |
@@ -23,6 +24,31 @@ A production-ready Next.js template with quality tooling, accessibility, observa
 | Dependency Updates | Dependabot (weekly, grouped) |
 | Deployment | [Vercel](https://vercel.com) (zero config) |
 
+## Demo App
+
+The template includes a **contact list application** that demonstrates real-world patterns:
+
+- **Landing page** with hero section and feature cards
+- **Login** with two preset accounts (viewer / editor)
+- **Contact list** with search, photo avatars, collapsible notes, and timezone display
+- **Add / Edit forms** with Zod validation and inline error feedback
+- **Delete** with confirmation dialog and optimistic UI updates
+- **Role-based access** — viewers can browse; editors can create, update, and delete
+
+### Preset Accounts
+
+| Role | Email | Password |
+|------|-------|----------|
+| Viewer (read-only) | `viewer@example.com` | `viewer123` |
+| Editor (full CRUD) | `editor@example.com` | `editor123` |
+
+### React 19 Patterns Used
+
+- **Server Actions** (`'use server'`) for all form mutations
+- **`useActionState`** for form state and server response handling
+- **`useFormStatus`** for pending/loading UI during submission
+- **`useOptimistic`** for instant UI feedback on delete
+
 ## Getting Started
 
 ```bash
@@ -36,18 +62,33 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ```
 src/
-  app/           # Next.js App Router pages and layouts
-  lib/           # Utilities (logger, etc.)
-  env.ts         # Type-safe environment variables (T3 Env)
-  instrumentation.ts  # OpenTelemetry setup
-  stories/       # Storybook example stories
-e2e/             # Playwright end-to-end tests
+  app/
+    page.tsx            # Landing page
+    layout.tsx          # Root layout with header + footer
+    error.tsx           # Global error boundary
+    not-found.tsx       # Global 404
+    login/              # Login page + form
+    contacts/           # Contact list, add, edit pages
+    actions/            # Server Actions (auth, contacts)
+  components/
+    layout/             # Header, footer, nav link
+    contacts/           # Contact card, form, delete dialog, submit button
+    ui/                 # Inline alert
+    auth/               # Auth sync
+  lib/                  # Utilities (logger, contact store, auth session, timezone)
+  store/                # Zustand auth store
+  types/                # TypeScript types (contact, auth)
+  env.ts                # Type-safe environment variables (T3 Env)
+  instrumentation.ts    # OpenTelemetry setup
+  proxy.ts              # Route protection (Next.js 16 proxy)
+  stories/              # Storybook example stories
+e2e/                    # Playwright end-to-end tests
 libs/
-  ui/src/        # Shared UI library (shadcn/ui components)
-    components/  # UI components
-    lib/         # Utilities (cn helper)
-    hooks/       # Shared hooks
-docs/            # Reference documentation
+  ui/src/               # Shared UI library (shadcn/ui components)
+    components/         # UI components (button, card, alert, dialog, etc.)
+    lib/                # Utilities (cn helper)
+    hooks/              # Shared hooks
+docs/                   # Reference documentation
 ```
 
 Import shared UI components via `@next-template/ui/*`:
@@ -96,6 +137,31 @@ Accessibility is checked at every layer:
 | Unit tests | `vitest-axe` | axe-core violations in rendered components |
 | Storybook | `@storybook/addon-a11y` | axe-core violations across all stories |
 | E2E tests | `@axe-core/playwright` | Full-page axe scans in real browsers |
+
+## Architecture
+
+### Data Flow
+
+```
+Server Component (reads data) → Client Component (renders UI)
+                                        ↓
+                                 Server Action (mutation)
+                                        ↓
+                                 revalidatePath (refresh)
+```
+
+- **Reads**: Server Components fetch directly from the in-memory store
+- **Mutations**: Server Actions validate with Zod, update the store, and call `revalidatePath`
+- **Auth**: Cookie-based sessions (set by Server Actions, read by `proxy.ts` and Server Components)
+- **Client state**: Zustand synced from the server via `AuthSync` component
+
+### Route Protection
+
+`proxy.ts` (Next.js 16's replacement for middleware) protects routes:
+
+- `/contacts/*` requires authentication
+- `/contacts/new` and `/contacts/[id]/edit` require editor role
+- Unauthenticated users are redirected to `/login`
 
 ## Linting Strategy
 

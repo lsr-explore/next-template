@@ -9,15 +9,15 @@
 
 ## Features
 
-- [ ] Add a realistic landing page with header, footer, and navigation
-- [ ] Add simple auth flow with mock API backend (MSW)
-  - [ ] Use Server Actions (`'use server'`) for form submissions
-  - [ ] Use `useActionState` for form state + server response handling
-  - [ ] Use `useFormStatus` for pending/loading UI during submission
-  - [ ] Use `useOptimistic` for instant UI feedback before server responds
-- [ ] Add Zustand for client state management
+- [x] Add a realistic landing page with header, footer, and navigation
+- [x] Add simple auth flow with cookie-based sessions and Zustand
+  - [x] Use Server Actions (`'use server'`) for form submissions
+  - [x] Use `useActionState` for form state + server response handling
+  - [x] Use `useFormStatus` for pending/loading UI during submission
+  - [x] Use `useOptimistic` for instant UI feedback before server responds
+- [x] Add Zustand for client state management
 - [ ] Add TanStack Query for server state / data fetching
-- [ ] Add `error.tsx`, `not-found.tsx`, and `loading.tsx` app router pages
+- [x] Add `error.tsx`, `not-found.tsx`, and `loading.tsx` app router pages
 - [ ] Add client-side React error boundary component
 - [ ] Add SEO / AEO metadata pattern (`generateMetadata`, Open Graph, canonical URL)
   - [ ] Add JSON-LD structured data helper using `schema-dts` for type-safe Schema.org markup
@@ -47,6 +47,6 @@
 ## Claude Skills/Rules
 
 - [ ] Vercel - agent-skills - [github - agent skills](https://github.com/vercel-labs/agent-skills)
-- [ ] Ad Hoc - Activate Framework 
+- [ ] Ad Hoc - Activate Framework
   - [Ad Hoc - article intro to Activate Framework](https://www.adhoc.team/2026/03/18/activate-framework-a-skills-kit-for-ai-development-in-government/)
   - [github - activate framework](https://github.com/adhocteam/activate-framework)
