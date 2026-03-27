@@ -18,6 +18,9 @@
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
     "check:all": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
+    "clean": "rm -rf .next out dist .vercel storybook-static",
+    "clean:tests": "rm -rf coverage test-output test-results *.lcov",
+    "clean:all": "pnpm clean && pnpm clean:tests && rm -rf node_modules",
     "prepare": "husky"
   },
   "dependencies": {
