@@ -10,7 +10,8 @@ A production-ready Next.js template with quality tooling, accessibility, observa
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) + [shadcn/ui](https://ui.shadcn.com) |
 | Formatting | [Biome](https://biomejs.dev) |
 | Linting | [ESLint](https://eslint.org) + [jsx-a11y](https://github.com/jsx-eslint/eslint-plugin-jsx-a11y) + [eslint-config-biome](https://github.com/nickmccurdy/eslint-config-biome) |
-| Testing | [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com) + [vitest-axe](https://github.com/chaance/vitest-axe) |
+| Unit Testing | [Vitest](https://vitest.dev) + [Testing Library](https://testing-library.com) + [vitest-axe](https://github.com/chaance/vitest-axe) |
+| E2E Testing | [Playwright](https://playwright.dev) + [@axe-core/playwright](https://github.com/dequelabs/axe-core-npm/tree/develop/packages/playwright) |
 | Component Dev | [Storybook](https://storybook.js.org) (with a11y addon) |
 | Logging | [Pino](https://getpino.io) (server-side) |
 | Observability | [OpenTelemetry](https://opentelemetry.io) via [@vercel/otel](https://vercel.com/docs/observability/otel-overview) |
@@ -40,6 +41,7 @@ src/
   env.ts         # Type-safe environment variables (T3 Env)
   instrumentation.ts  # OpenTelemetry setup
   stories/       # Storybook example stories
+e2e/             # Playwright end-to-end tests
 libs/
   ui/src/        # Shared UI library (shadcn/ui components)
     components/  # UI components
@@ -70,9 +72,30 @@ import { cn } from '@next-template/ui/lib/utils';
 | `pnpm test` | Run Vitest |
 | `pnpm test:watch` | Vitest in watch mode |
 | `pnpm test:coverage` | Vitest with coverage report |
+| `pnpm e2e` | Run Playwright E2E tests |
+| `pnpm e2e:ui` | Playwright interactive UI mode |
 | `pnpm storybook` | Start Storybook on port 6006 |
 | `pnpm analyze` | Build with bundle analyzer |
 | `pnpm check:all` | Run all quality checks (format, lint, typecheck, test) |
+
+## Testing Strategy
+
+This project has three layers of testing:
+
+- **Unit tests** — Vitest + Testing Library for component logic and rendering. Co-located as `*.test.tsx` files next to source.
+- **Storybook tests** — Stories run as Vitest browser tests via `@storybook/addon-vitest`. The a11y addon fails on accessibility violations.
+- **E2E tests** — Playwright runs against a production build across Chromium, Firefox, and WebKit. Tests live in `e2e/`.
+
+### Accessibility Testing
+
+Accessibility is checked at every layer:
+
+| Layer | Tool | What it catches |
+|-------|------|----------------|
+| Lint time | `eslint-plugin-jsx-a11y` | Missing alt text, incorrect ARIA, invalid roles |
+| Unit tests | `vitest-axe` | axe-core violations in rendered components |
+| Storybook | `@storybook/addon-a11y` | axe-core violations across all stories |
+| E2E tests | `@axe-core/playwright` | Full-page axe scans in real browsers |
 
 ## Linting Strategy
 

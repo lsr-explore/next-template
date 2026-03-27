@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
+import { axe } from 'vitest-axe';
 import Home from './page';
 
 describe('Home Page', () => {
@@ -11,5 +12,11 @@ describe('Home Page', () => {
   it('renders the Next.js logo', () => {
     render(<Home />);
     expect(screen.getByAltText('Next.js logo')).toBeInTheDocument();
+  });
+
+  it('has no accessibility violations', async () => {
+    const { container } = render(<Home />);
+    const results = await axe(container);
+    expect(results).toHaveNoViolations();
   });
 });

@@ -45,4 +45,8 @@ storybook-static/
 
 # test output
 test-output/
+test-results/
 *.lcov
+
+# playwright
+/playwright-report/

@@ -17,6 +17,8 @@
       "!**/coverage",
       "!**/test-output",
       "!**/storybook-static",
+      "!**/test-results",
+      "!**/playwright-report",
       "!**/next-env.d.ts",
       "!.vercel"
     ],

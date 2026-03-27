@@ -17,9 +17,11 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
+    "e2e": "playwright test",
+    "e2e:ui": "playwright test --ui",
     "check:all": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
     "clean": "rm -rf .next out dist .vercel storybook-static",
-    "clean:tests": "rm -rf coverage test-output test-results *.lcov",
+    "clean:tests": "rm -rf coverage test-output test-results playwright-report *.lcov",
     "clean:all": "pnpm clean && pnpm clean:tests && rm -rf node_modules",
     "prepare": "husky"
   },
@@ -42,11 +44,13 @@
     "zod": "^4.3.6"
   },
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.1",
     "@biomejs/biome": "^2.4.9",
     "@chromatic-com/storybook": "^5.1.1",
     "@commitlint/cli": "^20.5.0",
     "@commitlint/config-conventional": "^20.5.0",
     "@next/bundle-analyzer": "^16.2.1",
+    "@playwright/test": "^1.58.2",
     "@storybook/addon-a11y": "^10.3.3",
     "@storybook/addon-docs": "^10.3.3",
     "@storybook/addon-onboarding": "^10.3.3",
