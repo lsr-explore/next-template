@@ -14,7 +14,7 @@ test.describe('Authentication', () => {
     await page.goto('/login');
 
     await page.getByLabel('Email').fill('viewer@example.com');
-    await page.getByLabel('Password').fill('viewer123');
+    await page.getByLabel('Password').fill('ContactsViewer123');
     await page.getByRole('main').getByRole('button', { name: 'Sign in' }).click();
 
     await page.waitForURL('/contacts');
@@ -25,7 +25,7 @@ test.describe('Authentication', () => {
     await page.goto('/login');
 
     await page.getByLabel('Email').fill('editor@example.com');
-    await page.getByLabel('Password').fill('editor123');
+    await page.getByLabel('Password').fill('ContactsEditor123');
     await page.getByRole('main').getByRole('button', { name: 'Sign in' }).click();
 
     await page.waitForURL('/contacts');

@@ -16,12 +16,12 @@ export interface PresetAccount {
 export const PRESET_USERS: Record<UserRole, PresetAccount> = {
   viewer: {
     email: 'viewer@example.com',
-    password: 'viewer123',
+    password: 'ContactsViewer123',
     user: { id: '1', name: 'Alex Reader', email: 'viewer@example.com', role: 'viewer' },
   },
   editor: {
     email: 'editor@example.com',
-    password: 'editor123',
+    password: 'ContactsEditor123',
     user: { id: '2', name: 'Sam Editor', email: 'editor@example.com', role: 'editor' },
   },
 };
