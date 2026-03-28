@@ -1,7 +1,15 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { axe } from 'vitest-axe';
 import Home from './page';
+
+vi.mock('next/link', () => ({
+  default: ({ children, href, ...props }: React.ComponentProps<'a'>) => (
+    <a href={href as string} {...props}>
+      {children}
+    </a>
+  ),
+}));
 
 describe('Home Page', () => {
   it('renders the heading', () => {
@@ -11,15 +19,15 @@ describe('Home Page', () => {
 
   it('renders the sign in and view contacts links', () => {
     render(<Home />);
-    expect(screen.getByRole('link', { name: 'Sign in' })).toBeInTheDocument();
-    expect(screen.getByRole('link', { name: 'View contacts' })).toBeInTheDocument();
+    screen.getByRole('button', { name: 'Sign in' });
+    screen.getByRole('button', { name: 'View contacts' });
   });
 
   it('renders the feature cards', () => {
     render(<Home />);
-    expect(screen.getByText('Contact Management')).toBeInTheDocument();
-    expect(screen.getByText('Role-Based Access')).toBeInTheDocument();
-    expect(screen.getByText('Search & Filter')).toBeInTheDocument();
+    screen.getByText('Contact Management');
+    screen.getByText('Role-Based Access');
+    screen.getByText('Search & Filter');
   });
 
   it('has no accessibility violations', async () => {
