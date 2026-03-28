@@ -41,6 +41,12 @@ jobs:
       - name: TypeScript typecheck
         run: pnpm typecheck
 
+      - name: Stylelint (CSS)
+        run: pnpm lint:css
+
+      - name: Markdownlint
+        run: pnpm lint:md
+
   build:
     name: Build
     runs-on: ubuntu-latest

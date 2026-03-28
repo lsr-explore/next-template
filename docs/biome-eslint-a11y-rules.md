@@ -17,6 +17,7 @@ This project uses **two linters** with clearly separated responsibilities:
 2. **`eslint-config-biome`** is the last entry in `eslint.config.mjs` — it disables ESLint formatting/style rules that Biome already handles (spacing, quotes, semicolons, etc.).
 
 This means:
+
 - **Accessibility** → ESLint (jsx-a11y) is the single source of truth
 - **Formatting** → Biome is the single source of truth
 - **No rule conflicts** between the two tools
