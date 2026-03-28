@@ -2,10 +2,10 @@
 
 import { Button } from '@next-template/ui/components/ui/button';
 import { Input } from '@next-template/ui/components/ui/input';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, X } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useOptimistic, useState } from 'react';
+import { useOptimistic, useRef, useState } from 'react';
 import { deleteContactAction } from '@/app/actions/contact-actions';
 import { ContactCard } from '@/components/contacts/contact-card';
 import { InlineAlert } from '@/components/ui/inline-alert';
@@ -21,6 +21,8 @@ interface ContactListProps {
 export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState(initialQuery);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [optimisticContacts, removeOptimistic] = useOptimistic(
     contacts,
     (current, removedId: string) => current.filter((ct) => ct.id !== removedId),
@@ -30,9 +32,14 @@ export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) 
 
   const handleSearch = (ev: React.FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const formData = new FormData(ev.currentTarget);
-    const query = (formData.get('q') as string).trim();
+    const query = searchQuery.trim();
     router.push(query ? `/contacts?q=${encodeURIComponent(query)}` : '/contacts');
+  };
+
+  const handleClear = () => {
+    setSearchQuery('');
+    router.push('/contacts');
+    inputRef.current?.focus();
   };
 
   const handleDelete = async (id: string) => {
@@ -59,18 +66,35 @@ export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) 
         )}
       </div>
 
-      <form onSubmit={handleSearch} className="relative max-w-sm" role="search">
-        <Search
-          className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
-          aria-hidden="true"
-        />
-        <Input
-          name="q"
-          defaultValue={initialQuery}
-          placeholder="Search contacts..."
-          className="pl-9"
-          aria-label="Search contacts"
-        />
+      <form onSubmit={handleSearch} className="flex max-w-md items-center gap-2" role="search">
+        <div className="relative flex-1">
+          <Search
+            className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+            aria-hidden="true"
+          />
+          <Input
+            ref={inputRef}
+            name="q"
+            value={searchQuery}
+            onChange={(ev) => setSearchQuery(ev.target.value)}
+            placeholder="Search contacts..."
+            className="pl-9 pr-9"
+            aria-label="Search contacts"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={handleClear}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+              aria-label="Clear search"
+            >
+              <X className="size-4" />
+            </button>
+          )}
+        </div>
+        <Button type="submit" size="sm">
+          Search
+        </Button>
       </form>
 
       {error && <InlineAlert variant="error" message={error} onDismiss={() => setError(null)} />}
