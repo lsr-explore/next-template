@@ -115,6 +115,7 @@ Enforce hard limits on bundle sizes to prevent bundle bloat. The build will fail
 #### Example Configuration
 
 Add to `package.json`:
+
 ```json
 {
   "size-limit": [
@@ -137,11 +138,13 @@ Add to `package.json`:
 #### When to Adjust Limits
 
 **Increase limits** when:
+
 - Adding substantial features (e.g., charts, rich text editors)
 - New major dependencies required
 - Document the reason in commit message
 
 **Decrease limits** when:
+
 - Removing dependencies
 - Optimizing bundle size
 - After successful code splitting
@@ -237,21 +240,25 @@ export default async function Page() {
 Recommended services:
 
 1. **Vercel Analytics** (if hosting on Vercel)
+
    ```bash
    pnpm add @vercel/analytics @vercel/speed-insights
    ```
 
 2. **Google Analytics 4** with Web Vitals
+
    ```typescript
    gtag('event', metric.name, { value: metric.value });
    ```
 
 3. **Sentry Performance Monitoring**
+
    ```bash
    pnpm add @sentry/nextjs
    ```
 
 4. **Custom Analytics Endpoint**
+
    ```typescript
    // app/api/analytics/route.ts
    export async function POST(request: Request) {
@@ -267,11 +274,13 @@ Recommended services:
 ### Issue: High LCP
 
 **Causes**:
+
 - Large images without optimization
 - Blocking JavaScript
 - Slow server response (TTFB)
 
 **Solutions**:
+
 - Use Next.js `<Image>` with `priority` prop
 - Move JavaScript to bottom or use `defer`
 - Optimize API responses, add caching
@@ -280,11 +289,13 @@ Recommended services:
 ### Issue: High CLS
 
 **Causes**:
+
 - Images without dimensions
 - Dynamic content insertion
 - Web fonts loading
 
 **Solutions**:
+
 - Always specify image width/height
 - Reserve space for dynamic content
 - Use `font-display: swap` (Next.js does this)
@@ -292,11 +303,13 @@ Recommended services:
 ### Issue: High INP
 
 **Causes**:
+
 - Heavy JavaScript execution
 - Too many re-renders
 - Expensive computations on main thread
 
 **Solutions**:
+
 - Use React.memo for expensive components
 - Debounce user inputs
 - Move heavy work to Web Workers
@@ -305,11 +318,13 @@ Recommended services:
 ### Issue: Large Bundle Size
 
 **Causes**:
+
 - Large dependencies (moment.js, lodash, etc.)
 - Importing entire libraries
 - Not using tree-shaking
 
 **Solutions**:
+
 - Replace large libraries (moment → date-fns)
 - Use named imports
 - Analyze with `pnpm analyze`

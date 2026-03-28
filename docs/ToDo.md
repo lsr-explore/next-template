@@ -43,9 +43,9 @@
 - [ ] Add production `Dockerfile` with multi-stage build (for non-Vercel deployments)
 - [x] Add dockerfile for local development
 - [ ] Enable React Compiler in `next.config.ts` when stable (auto-memoization)
-- [ ] Add stylelint - READY FOR DEVELOPMENT
-- [ ] Add markdownlint - READY FOR DEVELOPMENT
-- [ ] Add scripts for shutting down docker and cleaning builds, images, etc. - READY FOR DEVELOPMENT
+- [x] Add stylelint
+- [x] Add markdownlint
+- [x] Add scripts for shutting down docker and cleaning builds, images, etc.
 
 ## Additional Core Functionality (evaluate per project)
 
@@ -67,7 +67,7 @@
 
 ## Bugs
 
-- [ ] Crash while in editor view of contacts - READY FOR DEVELOPMENT 
+- [ ] Crash while in editor view of contacts - READY FOR DEVELOPMENT
 
 ```js
  Error: An error occurred while loading instrumentation hook: Could not parse module '[project]/src/instrumentation.ts', file not found
