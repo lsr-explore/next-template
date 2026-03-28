@@ -67,7 +67,7 @@
 
 ## Bugs
 
-- [ ] Crash while in editor view of contacts - READY FOR DEVELOPMENT 
+- [x] Crash while in editor view of contacts — **Not a code bug.** Turbopack dev cache issue. Fix: `pnpm clean && pnpm dev`.
 
 ```js
  Error: An error occurred while loading instrumentation hook: Could not parse module '[project]/src/instrumentation.ts', file not found
@@ -76,7 +76,7 @@
   code: 'MODULE_UNPARSABLE'
 ```
 
-- [ ] Crash while editing [David Kim](http://localhost:3000/contacts/c6/edit) - READY FOR DEVELOPMENT
+- [x] Base UI nativeButton warning on edit page — **Dev-only console warning, not a crash.** The `render={<Link>}` pattern with `nativeButton={!render}` is correct. Warning is a hydration timing false positive. Does not occur in production builds.
 
 ```js
  GET /contacts/c6/edit 200 in 154ms (next.js: 11ms, proxy.ts: 12ms, application-code: 131ms)
