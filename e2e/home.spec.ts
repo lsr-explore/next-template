@@ -2,23 +2,21 @@ import AxeBuilder from '@axe-core/playwright';
 import { expect, test } from '@playwright/test';
 
 test.describe('Home page', () => {
-  test('should render the heading and key links', async ({ page }) => {
+  test('should render the heading and CTA links', async ({ page }) => {
     await page.goto('/');
 
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText(
-      'To get started, edit the page.tsx file.',
-    );
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('A modern contact list');
 
-    await expect(page.getByRole('link', { name: 'Documentation' })).toBeVisible();
-
-    await expect(page.getByRole('link', { name: 'Deploy Now' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'Sign in' })).toBeVisible();
+    await expect(page.getByRole('link', { name: 'View contacts' })).toBeVisible();
   });
 
-  test('should display the Next.js logo', async ({ page }) => {
+  test('should display feature cards', async ({ page }) => {
     await page.goto('/');
 
-    const logo = page.getByRole('img', { name: 'Next.js logo' });
-    await expect(logo).toBeVisible();
+    await expect(page.getByText('Contact Management')).toBeVisible();
+    await expect(page.getByText('Role-Based Access')).toBeVisible();
+    await expect(page.getByText('Search & Filter')).toBeVisible();
   });
 
   test('should have no accessibility violations', async ({ page }) => {
