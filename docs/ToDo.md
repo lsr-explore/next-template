@@ -23,13 +23,13 @@
   - [ ] Add JSON-LD structured data helper using `schema-dts` for type-safe Schema.org markup
   - [ ] Ensure semantic HTML patterns support AI answer engine parsing
 - [x] Add `robots.ts` and `sitemap.ts` route handlers (benefits both SEO and AI crawlers)
-- [ ] Search - READY FOR DEVELOPMENT
-  - [ ] What does search check against?  Entered architect, but no matches were returned.  - READY FOR DEVELOPMENT
-  - [ ] Search field was cleared when no contacts match your search were returned.- READY FOR DEVELOPMENT
-  - [ ] Search should have a button to initiate search- READY FOR DEVELOPMENT
-  - [ ] Search should have a clear button to clear the contents of the search field- READY FOR DEVELOPMENT
-- [ ] Password field should have a show button - READY FOR DEVELOPMENT
-- [ ] Add a 404 page - READY FOR DEVELOPMENT
+- [x] Search
+  - [x] Search now includes notes field (fixes "architect" not matching)
+  - [x] Search field preserves query via controlled input state
+  - [x] Search button added to form
+  - [x] Clear button (X) added to search field
+- [x] Password field show/hide toggle
+- [x] Add a 404 page - not-found.tsx
 
 ## Infrastructure
 

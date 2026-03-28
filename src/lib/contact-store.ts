@@ -42,7 +42,8 @@ export const searchContacts = (query: string): Contact[] => {
       contact.email.toLowerCase().includes(normalizedQuery) ||
       contact.city.toLowerCase().includes(normalizedQuery) ||
       contact.country.toLowerCase().includes(normalizedQuery) ||
-      contact.phone.includes(normalizedQuery),
+      contact.phone.includes(normalizedQuery) ||
+      contact.notes?.toLowerCase().includes(normalizedQuery),
   );
 };
 
