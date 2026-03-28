@@ -2,10 +2,10 @@
 
 ## Setup / Docs
 
-- [ ] Connect to Dependabot
+- [x] Connect to Dependabot
 - [ ] Connect and deploy to Vercel
-- [ ] Add GitHub code checks
-- [ ] PR template
+- [x] Add GitHub code checks
+- [x] PR template
 
 ## Features
 
