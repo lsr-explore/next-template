@@ -4,7 +4,7 @@ import { expect, test } from '@playwright/test';
 const loginAsEditor = async (page: import('@playwright/test').Page) => {
   await page.goto('/login');
   await page.getByLabel('Email').fill('editor@example.com');
-  await page.getByLabel('Password').fill('editor123');
+  await page.getByLabel('Password').fill('ContactsEditor123');
   await page.getByRole('main').getByRole('button', { name: 'Sign in' }).click();
   await page.waitForURL('/contacts');
 };
@@ -12,7 +12,7 @@ const loginAsEditor = async (page: import('@playwright/test').Page) => {
 const loginAsViewer = async (page: import('@playwright/test').Page) => {
   await page.goto('/login');
   await page.getByLabel('Email').fill('viewer@example.com');
-  await page.getByLabel('Password').fill('viewer123');
+  await page.getByLabel('Password').fill('ContactsViewer123');
   await page.getByRole('main').getByRole('button', { name: 'Sign in' }).click();
   await page.waitForURL('/contacts');
 };

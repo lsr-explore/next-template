@@ -39,8 +39,8 @@ The template includes a **contact list application** that demonstrates real-worl
 
 | Role | Email | Password |
 |------|-------|----------|
-| Viewer (read-only) | `viewer@example.com` | `viewer123` |
-| Editor (full CRUD) | `editor@example.com` | `editor123` |
+| Viewer (read-only) | `viewer@example.com` | `ContactsViewer123` |
+| Editor (full CRUD) | `editor@example.com` | `ContactsEditor123` |
 
 ### React 19 Patterns Used
 

@@ -18,24 +18,34 @@
 - [x] Add Zustand for client state management
 - [ ] Add TanStack Query for server state / data fetching
 - [x] Add `error.tsx`, `not-found.tsx`, and `loading.tsx` app router pages
-- [ ] Add client-side React error boundary component
+- [x] Add client-side React error boundary component
 - [ ] Add SEO / AEO metadata pattern (`generateMetadata`, Open Graph, canonical URL)
   - [ ] Add JSON-LD structured data helper using `schema-dts` for type-safe Schema.org markup
   - [ ] Ensure semantic HTML patterns support AI answer engine parsing
-- [ ] Add `robots.ts` and `sitemap.ts` route handlers (benefits both SEO and AI crawlers)
+- [x] Add `robots.ts` and `sitemap.ts` route handlers (benefits both SEO and AI crawlers)
+- [ ] Search - READY FOR DEVELOPMENT
+  - [ ] What does search check against?  Entered architect, but no matches were returned.  - READY FOR DEVELOPMENT
+  - [ ] Search field was cleared when no contacts match your search were returned.- READY FOR DEVELOPMENT
+  - [ ] Search should have a button to initiate search- READY FOR DEVELOPMENT
+  - [ ] Search should have a clear button to clear the contents of the search field- READY FOR DEVELOPMENT
+- [ ] Password field should have a show button - READY FOR DEVELOPMENT
+- [ ] Add a 404 page - READY FOR DEVELOPMENT
 
 ## Infrastructure
 
-- [ ] Add security headers to `next.config.ts` (HSTS, CSP, XSS protection)
+- [x] Add security headers to `next.config.ts` (HSTS, CSP, XSS protection)
 - [ ] Set up MSW for mock API responses during development
-- [ ] Enhance CI workflows (bundle size checks, CodeQL security scanning, Nx caching)
-- [ ] Add madge
-- [ ] Add depcruise
+- [x] Enhance CI workflows (bundle size checks, CodeQL security scanning, build caching)
+- [x] Add madge
+- [x] Add depcruise
 - [ ] Consider adding `useReportWebVitals()` to log Web Vitals to console during dev (DevTools may suffice)
-- [ ] Add `size-limit` for bundle size tracking in CI
+- [x] Add `size-limit` for bundle size tracking in CI
 - [ ] Add production `Dockerfile` with multi-stage build (for non-Vercel deployments)
-- [ ] Add dockerfile for local development
+- [x] Add dockerfile for local development
 - [ ] Enable React Compiler in `next.config.ts` when stable (auto-memoization)
+- [ ] Add stylelint - READY FOR DEVELOPMENT
+- [ ] Add markdownlint - READY FOR DEVELOPMENT
+- [ ] Add scripts for shutting down docker and cleaning builds, images, etc. - READY FOR DEVELOPMENT
 
 ## Additional Core Functionality (evaluate per project)
 
@@ -50,3 +60,27 @@
 - [ ] Ad Hoc - Activate Framework
   - [Ad Hoc - article intro to Activate Framework](https://www.adhoc.team/2026/03/18/activate-framework-a-skills-kit-for-ai-development-in-government/)
   - [github - activate framework](https://github.com/adhocteam/activate-framework)
+
+## Accessibility
+
+- [ ] Delete button doesn't meet color contrast ratio threshold. WCAG 1.4.3
+
+## Bugs
+
+- [ ] Crash while in editor view of contacts - READY FOR DEVELOPMENT 
+
+```js
+ Error: An error occurred while loading instrumentation hook: Could not parse module '[project]/src/instrumentation.ts', file not found
+    at module evaluation (.next/dev/server/chunks/[project]_src_instrumentation_ts_04b8hiw._.js:4:11)
+    at Object.<anonymous> (.next/dev/server/instrumentation.js:3:3) {
+  code: 'MODULE_UNPARSABLE'
+```
+
+- [ ] Crash while editing [David Kim](http://localhost:3000/contacts/c6/edit) - READY FOR DEVELOPMENT
+
+```js
+ GET /contacts/c6/edit 200 in 154ms (next.js: 11ms, proxy.ts: 12ms, application-code: 131ms)
+[browser] Base UI: A component that acts as a button expected a native <button> because the `nativeButton` prop is true. Rendering a non-<button> removes native button semantics, which can impact forms and accessibility. Use a real <button> in the `render` prop, or set `nativeButton` to `false`.
+    at Button (http://localhost:3000/_next/static/chunks/_13k.fs4._.js:124:497)
+    at EditContactPage (about://React/Server/file:///Users/laurie/dev/next-template/main/next-template/.next/dev/server/chunks/ssr/%5Broot-of-the-server%5D__0s_pg9~._.js?55:98:477)
+```

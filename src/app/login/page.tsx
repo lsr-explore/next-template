@@ -21,10 +21,10 @@ const LoginPage = () => {
           <p className="font-medium text-foreground">Preset accounts</p>
           <ul className="mt-2 space-y-1">
             <li>
-              <strong>Viewer:</strong> viewer@example.com / viewer123
+              <strong>Viewer:</strong> viewer@example.com / ContactsViewer123
             </li>
             <li>
-              <strong>Editor:</strong> editor@example.com / editor123
+              <strong>Editor:</strong> editor@example.com / ContactsEditor123
             </li>
           </ul>
         </div>
