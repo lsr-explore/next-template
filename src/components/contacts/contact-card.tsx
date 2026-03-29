@@ -10,8 +10,9 @@ import {
 import { cn } from '@next-template/ui/lib/utils';
 import { ChevronDown, Clock, Mail, MapPin, Pencil, Phone, StickyNote } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import { Link } from '@/i18n/navigation';
 import { formatTimezoneDisplay } from '@/lib/timezone';
 import type { Contact } from '@/types/contact';
 import { DeleteContactDialog } from './delete-contact-dialog';
@@ -24,6 +25,8 @@ interface ContactCardProps {
 
 export const ContactCard = ({ contact, isEditor, onDelete }: ContactCardProps) => {
   const [notesOpen, setNotesOpen] = useState(false);
+  const tc = useTranslations('contacts');
+  const tCommon = useTranslations('common');
 
   const locationParts = [contact.city, contact.state, contact.country].filter(Boolean);
   const locationString = locationParts.join(', ');
@@ -34,7 +37,7 @@ export const ContactCard = ({ contact, isEditor, onDelete }: ContactCardProps) =
         <div className="flex items-start gap-3">
           <Image
             src={contact.photo}
-            alt={`Photo of ${contact.name}`}
+            alt={tc('photoOf', { name: contact.name })}
             width={48}
             height={48}
             className="rounded-full object-cover"
@@ -73,7 +76,7 @@ export const ContactCard = ({ contact, isEditor, onDelete }: ContactCardProps) =
             >
               <span className="flex items-center gap-1.5">
                 <StickyNote className="size-3.5" aria-hidden="true" />
-                Notes
+                {tCommon('notes')}
               </span>
               <ChevronDown
                 className={cn('size-3.5 transition-transform', notesOpen && 'rotate-180')}
@@ -94,7 +97,7 @@ export const ContactCard = ({ contact, isEditor, onDelete }: ContactCardProps) =
               render={<Link href={`/contacts/${contact.id}/edit`} />}
             >
               <Pencil className="size-3.5" aria-hidden="true" />
-              Edit
+              {tCommon('edit')}
             </Button>
             <DeleteContactDialog
               contactName={contact.name}

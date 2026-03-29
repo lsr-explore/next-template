@@ -13,6 +13,7 @@ import {
 } from '@next-template/ui/components/ui/alert-dialog';
 import { Button } from '@next-template/ui/components/ui/button';
 import { Trash2 } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface DeleteContactDialogProps {
   contactName: string;
@@ -20,23 +21,25 @@ interface DeleteContactDialogProps {
 }
 
 export const DeleteContactDialog = ({ contactName, onConfirm }: DeleteContactDialogProps) => {
+  const tc = useTranslations('contacts');
+  const tCommon = useTranslations('common');
+
   return (
     <AlertDialog>
       <AlertDialogTrigger render={<Button variant="destructive" size="sm" />}>
         <Trash2 className="size-3.5" aria-hidden="true" />
-        Delete
+        {tCommon('delete')}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete contact</AlertDialogTitle>
+          <AlertDialogTitle>{tc('deleteTitle')}</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete <strong>{contactName}</strong>? This action cannot be
-            undone.
+            {tc('deleteConfirmation', { name: contactName })}
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction onClick={onConfirm}>Delete</AlertDialogAction>
+          <AlertDialogCancel>{tCommon('cancel')}</AlertDialogCancel>
+          <AlertDialogAction onClick={onConfirm}>{tCommon('delete')}</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

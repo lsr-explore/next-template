@@ -1,6 +1,7 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { getLocale } from 'next-intl/server';
 import { clearSession, setSession } from '@/lib/auth-session';
 import { PRESET_USERS } from '@/types/auth';
 
@@ -30,10 +31,12 @@ export const loginAction = async (
 
   await setSession(account.user);
 
-  redirect('/contacts');
+  const locale = await getLocale();
+  redirect(`/${locale}/contacts`);
 };
 
 export const logoutAction = async (): Promise<void> => {
   await clearSession();
-  redirect('/login');
+  const locale = await getLocale();
+  redirect(`/${locale}/login`);
 };

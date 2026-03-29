@@ -3,12 +3,12 @@
 import { Button } from '@next-template/ui/components/ui/button';
 import { Input } from '@next-template/ui/components/ui/input';
 import { Plus, Search, X } from 'lucide-react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { useOptimistic, useRef, useState } from 'react';
 import { deleteContactAction } from '@/app/actions/contact-actions';
 import { ContactCard } from '@/components/contacts/contact-card';
 import { InlineAlert } from '@/components/ui/inline-alert';
+import { Link, useRouter } from '@/i18n/navigation';
 import type { User } from '@/types/auth';
 import type { Contact } from '@/types/contact';
 
@@ -20,6 +20,7 @@ interface ContactListProps {
 
 export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) => {
   const router = useRouter();
+  const tc = useTranslations('contacts');
   const [error, setError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState(initialQuery);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -61,7 +62,7 @@ export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) 
         {isEditor && (
           <Button render={<Link href="/contacts/new" />}>
             <Plus className="size-4" aria-hidden="true" />
-            Add contact
+            {tc('addContact')}
           </Button>
         )}
       </div>
@@ -77,23 +78,23 @@ export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) 
             name="q"
             value={searchQuery}
             onChange={(ev) => setSearchQuery(ev.target.value)}
-            placeholder="Search contacts..."
+            placeholder={tc('searchPlaceholder')}
             className="pl-9 pr-9"
-            aria-label="Search contacts"
+            aria-label={tc('searchLabel')}
           />
           {searchQuery && (
             <button
               type="button"
               onClick={handleClear}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-              aria-label="Clear search"
+              aria-label={tc('clearSearch')}
             >
               <X className="size-4" />
             </button>
           )}
         </div>
         <Button type="submit" size="sm">
-          Search
+          <Search className="size-4" aria-hidden="true" />
         </Button>
       </form>
 
@@ -102,11 +103,11 @@ export const ContactList = ({ contacts, user, initialQuery }: ContactListProps) 
       {optimisticContacts.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-16 text-center">
           <p className="text-muted-foreground">
-            {initialQuery ? 'No contacts match your search.' : 'No contacts yet.'}
+            {initialQuery ? tc('noResults') : tc('noContacts')}
           </p>
           {isEditor && !initialQuery && (
             <Button variant="outline" className="mt-4" render={<Link href="/contacts/new" />}>
-              Add your first contact
+              {tc('addFirst')}
             </Button>
           )}
         </div>

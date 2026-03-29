@@ -1,0 +1,93 @@
+{
+  "common": {
+    "signIn": "Sign in",
+    "signOut": "Sign out",
+    "contacts": "Contacts",
+    "contactList": "Contact List",
+    "goHome": "Go home",
+    "tryAgain": "Try again",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "search": "Search",
+    "notes": "Notes",
+    "builtWith": "Built with Next.js",
+    "dismissAlert": "Dismiss alert"
+  },
+  "home": {
+    "title": "A modern contact list",
+    "description": "Built with Next.js, Server Actions, and React 19. Designed with accessibility and clean architecture in mind.",
+    "viewContacts": "View contacts",
+    "features": {
+      "contactManagement": {
+        "title": "Contact Management",
+        "description": "View, create, edit, and delete contacts with a clean, accessible interface."
+      },
+      "roleBasedAccess": {
+        "title": "Role-Based Access",
+        "description": "Viewers can browse contacts. Editors can create, update, and delete."
+      },
+      "searchFilter": {
+        "title": "Search & Filter",
+        "description": "Quickly find contacts by name, email, location, or phone number."
+      }
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "subtitle": "Use a preset account to explore the app.",
+    "email": "Email",
+    "password": "Password",
+    "showPassword": "Show password",
+    "hidePassword": "Hide password",
+    "presetAccounts": "Preset accounts",
+    "viewer": "Viewer",
+    "editor": "Editor"
+  },
+  "contacts": {
+    "title": "Contacts",
+    "addContact": "Add contact",
+    "searchPlaceholder": "Search contacts...",
+    "searchLabel": "Search contacts",
+    "clearSearch": "Clear search",
+    "noResults": "No contacts match your search.",
+    "noContacts": "No contacts yet.",
+    "addFirst": "Add your first contact",
+    "photoOf": "Photo of {name}",
+    "deleteTitle": "Delete contact",
+    "deleteConfirmation": "Are you sure you want to delete {name}? This action cannot be undone.",
+    "backToContacts": "Back to contacts",
+    "newTitle": "Add contact",
+    "newDescription": "Fill in the details for a new contact.",
+    "editTitle": "Edit contact",
+    "editDescription": "Update the details for {name}."
+  },
+  "contactForm": {
+    "photoUrl": "Photo URL",
+    "name": "Name",
+    "email": "Email",
+    "city": "City",
+    "stateProvince": "State / Province",
+    "country": "Country",
+    "phone": "Phone",
+    "notes": "Notes",
+    "createContact": "Create contact",
+    "saveChanges": "Save changes",
+    "optional": "Optional"
+  },
+  "errors": {
+    "somethingWentWrong": "Something went wrong",
+    "unexpectedError": "An unexpected error occurred.",
+    "failedToLoadContacts": "Failed to load contacts.",
+    "contactNotFound": "The contact you're looking for doesn't exist."
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page not found"
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "es": "Español"
+  }
+}

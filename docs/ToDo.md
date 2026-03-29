@@ -3,7 +3,7 @@
 ## Setup / Docs
 
 - [x] Connect to Dependabot
-- [ ] Connect and deploy to Vercel
+- [x] Connect and deploy to Vercel
 - [x] Add GitHub code checks
 - [x] PR template
 
@@ -49,7 +49,7 @@
 
 ## Additional Core Functionality (evaluate per project)
 
-- [ ] Add i18n with next-intl (hard to retrofit later)
+- [x] Add i18n with next-intl (English + Spanish with language toggle)
 - [ ] Add rate limiting middleware for API routes
 - [ ] Add parallel routes pattern (`@modal`, `@sidebar`) for modals without losing URL state
 - [ ] Add route groups (`(marketing)`, `(app)`) for separate layouts without affecting URLs
@@ -63,11 +63,17 @@
 
 ## Accessibility
 
-- [ ] Delete button doesn't meet color contrast ratio threshold. WCAG 1.4.3
+- [ ] Delete button doesn't meet color contrast ratio threshold. WCAG 1.4.3 - READY FOR DEVELOPMENT
+- [ ] Search input field should have a label - READY FOR DEVELOPMENT
+- [ ] Delete dialog should have an x in the top corner - READY FOR DEVELOPMENT
 
 ## Bugs
 
-- [ ] Crash while in editor view of contacts - READY FOR DEVELOPMENT
+- [ ] If user is already signed in, the Sign in button shouldn't be visible - READY FOR DEVELOPMENT
+- [ ] if the user is not signed in, they shouldn't have the button View Contacts - READY FOR DEVELOPMENT
+- [ ] Banner should display if on the contacts page when a contact has been updated - READY FOR DEVELOPMENT
+
+- [ ] Crash while in editor view of contacts - NEEDS RESEARCH
 
 ```js
  Error: An error occurred while loading instrumentation hook: Could not parse module '[project]/src/instrumentation.ts', file not found
@@ -76,7 +82,7 @@
   code: 'MODULE_UNPARSABLE'
 ```
 
-- [ ] Crash while editing [David Kim](http://localhost:3000/contacts/c6/edit) - READY FOR DEVELOPMENT
+- [ ] Crash while editing [David Kim](http://localhost:3000/contacts/c6/edit) - NEEDS RESEARCH 
 
 ```js
  GET /contacts/c6/edit 200 in 154ms (next.js: 11ms, proxy.ts: 12ms, application-code: 131ms)

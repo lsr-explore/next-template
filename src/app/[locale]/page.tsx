@@ -1,41 +1,40 @@
 import { Button } from '@next-template/ui/components/ui/button';
 import { Search, Shield, Users } from 'lucide-react';
-import Link from 'next/link';
+import { getTranslations } from 'next-intl/server';
+import { Link } from '@/i18n/navigation';
 
-const features = [
-  {
-    icon: Users,
-    title: 'Contact Management',
-    description: 'View, create, edit, and delete contacts with a clean, accessible interface.',
-  },
-  {
-    icon: Shield,
-    title: 'Role-Based Access',
-    description: 'Viewers can browse contacts. Editors can create, update, and delete.',
-  },
-  {
-    icon: Search,
-    title: 'Search & Filter',
-    description: 'Quickly find contacts by name, email, location, or phone number.',
-  },
-];
+const HomePage = async () => {
+  const tc = await getTranslations('common');
+  const th = await getTranslations('home');
 
-const HomePage = () => {
+  const features = [
+    {
+      icon: Users,
+      title: th('features.contactManagement.title'),
+      description: th('features.contactManagement.description'),
+    },
+    {
+      icon: Shield,
+      title: th('features.roleBasedAccess.title'),
+      description: th('features.roleBasedAccess.description'),
+    },
+    {
+      icon: Search,
+      title: th('features.searchFilter.title'),
+      description: th('features.searchFilter.description'),
+    },
+  ];
+
   return (
     <div className="flex flex-1 flex-col">
       {/* Hero */}
       <section className="flex flex-1 flex-col items-center justify-center px-4 py-16 text-center">
-        <h1 className="max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">
-          A modern contact list
-        </h1>
-        <p className="mt-4 max-w-lg text-lg text-muted-foreground">
-          Built with Next.js, Server Actions, and React 19. Designed with accessibility and clean
-          architecture in mind.
-        </p>
+        <h1 className="max-w-2xl text-4xl font-bold tracking-tight sm:text-5xl">{th('title')}</h1>
+        <p className="mt-4 max-w-lg text-lg text-muted-foreground">{th('description')}</p>
         <div className="mt-8 flex gap-3">
-          <Button render={<Link href="/login" />}>Sign in</Button>
+          <Button render={<Link href="/login" />}>{tc('signIn')}</Button>
           <Button variant="outline" render={<Link href="/contacts" />}>
-            View contacts
+            {th('viewContacts')}
           </Button>
         </div>
       </section>

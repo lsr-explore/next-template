@@ -2,6 +2,8 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { getLocale } from 'next-intl/server';
+import { routing } from '@/i18n/routing';
 import { requireEditor } from '@/lib/auth-session';
 import { createContact, deleteContact, updateContact } from '@/lib/contact-store';
 import { contactFormSchema } from '@/types/contact';
@@ -11,6 +13,12 @@ export interface ContactFormState {
   error?: string;
   fieldErrors?: Record<string, string[]>;
 }
+
+const revalidateContacts = () => {
+  for (const locale of routing.locales) {
+    revalidatePath(`/${locale}/contacts`);
+  }
+};
 
 const parseFormData = (formData: FormData) => ({
   photo: formData.get('photo') as string,
@@ -47,8 +55,9 @@ export const createContactAction = async (
   }
 
   createContact(result.data);
-  revalidatePath('/contacts');
-  redirect('/contacts');
+  revalidateContacts();
+  const locale = await getLocale();
+  redirect(`/${locale}/contacts`);
 };
 
 export const updateContactAction = async (
@@ -84,8 +93,9 @@ export const updateContactAction = async (
     return { success: false, error: 'Contact not found.' };
   }
 
-  revalidatePath('/contacts');
-  redirect('/contacts');
+  revalidateContacts();
+  const locale = await getLocale();
+  redirect(`/${locale}/contacts`);
 };
 
 export const deleteContactAction = async (formData: FormData): Promise<ContactFormState> => {
@@ -105,6 +115,6 @@ export const deleteContactAction = async (formData: FormData): Promise<ContactFo
     return { success: false, error: 'Contact not found.' };
   }
 
-  revalidatePath('/contacts');
+  revalidateContacts();
   return { success: true };
 };

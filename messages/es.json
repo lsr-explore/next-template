@@ -1,0 +1,93 @@
+{
+  "common": {
+    "signIn": "Iniciar sesión",
+    "signOut": "Cerrar sesión",
+    "contacts": "Contactos",
+    "contactList": "Lista de contactos",
+    "goHome": "Ir al inicio",
+    "tryAgain": "Intentar de nuevo",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "search": "Buscar",
+    "notes": "Notas",
+    "builtWith": "Hecho con Next.js",
+    "dismissAlert": "Descartar alerta"
+  },
+  "home": {
+    "title": "Una lista de contactos moderna",
+    "description": "Construida con Next.js, Server Actions y React 19. Diseñada pensando en la accesibilidad y una arquitectura limpia.",
+    "viewContacts": "Ver contactos",
+    "features": {
+      "contactManagement": {
+        "title": "Gestión de contactos",
+        "description": "Ver, crear, editar y eliminar contactos con una interfaz limpia y accesible."
+      },
+      "roleBasedAccess": {
+        "title": "Acceso basado en roles",
+        "description": "Los lectores pueden ver contactos. Los editores pueden crear, actualizar y eliminar."
+      },
+      "searchFilter": {
+        "title": "Buscar y filtrar",
+        "description": "Encuentra contactos rápidamente por nombre, correo electrónico, ubicación o teléfono."
+      }
+    }
+  },
+  "login": {
+    "title": "Iniciar sesión",
+    "subtitle": "Usa una cuenta predefinida para explorar la app.",
+    "email": "Correo electrónico",
+    "password": "Contraseña",
+    "showPassword": "Mostrar contraseña",
+    "hidePassword": "Ocultar contraseña",
+    "presetAccounts": "Cuentas predefinidas",
+    "viewer": "Lector",
+    "editor": "Editor"
+  },
+  "contacts": {
+    "title": "Contactos",
+    "addContact": "Agregar contacto",
+    "searchPlaceholder": "Buscar contactos...",
+    "searchLabel": "Buscar contactos",
+    "clearSearch": "Limpiar búsqueda",
+    "noResults": "Ningún contacto coincide con tu búsqueda.",
+    "noContacts": "Aún no hay contactos.",
+    "addFirst": "Agrega tu primer contacto",
+    "photoOf": "Foto de {name}",
+    "deleteTitle": "Eliminar contacto",
+    "deleteConfirmation": "¿Estás seguro de que deseas eliminar a {name}? Esta acción no se puede deshacer.",
+    "backToContacts": "Volver a contactos",
+    "newTitle": "Agregar contacto",
+    "newDescription": "Completa los datos del nuevo contacto.",
+    "editTitle": "Editar contacto",
+    "editDescription": "Actualiza los datos de {name}."
+  },
+  "contactForm": {
+    "photoUrl": "URL de foto",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "city": "Ciudad",
+    "stateProvince": "Estado / Provincia",
+    "country": "País",
+    "phone": "Teléfono",
+    "notes": "Notas",
+    "createContact": "Crear contacto",
+    "saveChanges": "Guardar cambios",
+    "optional": "Opcional"
+  },
+  "errors": {
+    "somethingWentWrong": "Algo salió mal",
+    "unexpectedError": "Ocurrió un error inesperado.",
+    "failedToLoadContacts": "No se pudieron cargar los contactos.",
+    "contactNotFound": "El contacto que buscas no existe."
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Página no encontrada"
+  },
+  "language": {
+    "label": "Idioma",
+    "en": "English",
+    "es": "Español"
+  }
+}
