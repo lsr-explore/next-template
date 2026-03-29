@@ -3,6 +3,7 @@
 import { Input } from '@next-template/ui/components/ui/input';
 import { Label } from '@next-template/ui/components/ui/label';
 import { Eye, EyeOff } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useActionState, useState } from 'react';
 import { type AuthFormState, loginAction } from '@/app/actions/auth-actions';
 import { SubmitButton } from '@/components/contacts/submit-button';
@@ -13,13 +14,15 @@ const initialState: AuthFormState = { success: false };
 export const LoginForm = () => {
   const [state, formAction] = useActionState(loginAction, initialState);
   const [showPassword, setShowPassword] = useState(false);
+  const tc = useTranslations('common');
+  const tl = useTranslations('login');
 
   return (
     <form action={formAction} className="space-y-4">
       {state.error && <InlineAlert variant="error" message={state.error} />}
 
       <div className="space-y-2">
-        <Label htmlFor="email">Email</Label>
+        <Label htmlFor="email">{tl('email')}</Label>
         <Input
           id="email"
           name="email"
@@ -31,7 +34,7 @@ export const LoginForm = () => {
       </div>
 
       <div className="space-y-2">
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">{tl('password')}</Label>
         <div className="relative">
           <Input
             id="password"
@@ -46,14 +49,14 @@ export const LoginForm = () => {
             type="button"
             onClick={() => setShowPassword((prev) => !prev)}
             className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-            aria-label={showPassword ? 'Hide password' : 'Show password'}
+            aria-label={showPassword ? tl('hidePassword') : tl('showPassword')}
           >
             {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
           </button>
         </div>
       </div>
 
-      <SubmitButton className="w-full">Sign in</SubmitButton>
+      <SubmitButton className="w-full">{tc('signIn')}</SubmitButton>
     </form>
   );
 };

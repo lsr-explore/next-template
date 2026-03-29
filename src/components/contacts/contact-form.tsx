@@ -3,6 +3,7 @@
 import { Input } from '@next-template/ui/components/ui/input';
 import { Label } from '@next-template/ui/components/ui/label';
 import { Textarea } from '@next-template/ui/components/ui/textarea';
+import { useTranslations } from 'next-intl';
 import { useActionState } from 'react';
 import {
   type ContactFormState,
@@ -23,6 +24,7 @@ const initialState: ContactFormState = { success: false };
 export const ContactForm = ({ mode, contact }: ContactFormProps) => {
   const action = mode === 'create' ? createContactAction : updateContactAction;
   const [state, formAction] = useActionState(action, initialState);
+  const tf = useTranslations('contactForm');
 
   return (
     <form action={formAction} className="space-y-6">
@@ -32,7 +34,7 @@ export const ContactForm = ({ mode, contact }: ContactFormProps) => {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-2 sm:col-span-2">
-          <Label htmlFor="photo">Photo URL</Label>
+          <Label htmlFor="photo">{tf('photoUrl')}</Label>
           <Input
             id="photo"
             name="photo"
@@ -47,12 +49,12 @@ export const ContactForm = ({ mode, contact }: ContactFormProps) => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="name">Name</Label>
+          <Label htmlFor="name">{tf('name')}</Label>
           <Input
             id="name"
             name="name"
             defaultValue={contact?.name}
-            placeholder="Full name"
+            placeholder={tf('name')}
             required
           />
           {state.fieldErrors?.name && (
@@ -61,7 +63,7 @@ export const ContactForm = ({ mode, contact }: ContactFormProps) => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="email">Email</Label>
+          <Label htmlFor="email">{tf('email')}</Label>
           <Input
             id="email"
             name="email"
@@ -76,25 +78,36 @@ export const ContactForm = ({ mode, contact }: ContactFormProps) => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="city">City</Label>
-          <Input id="city" name="city" defaultValue={contact?.city} placeholder="City" required />
+          <Label htmlFor="city">{tf('city')}</Label>
+          <Input
+            id="city"
+            name="city"
+            defaultValue={contact?.city}
+            placeholder={tf('city')}
+            required
+          />
           {state.fieldErrors?.city && (
             <p className="text-sm text-destructive">{state.fieldErrors.city[0]}</p>
           )}
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="state">State / Province</Label>
-          <Input id="state" name="state" defaultValue={contact?.state} placeholder="Optional" />
+          <Label htmlFor="state">{tf('stateProvince')}</Label>
+          <Input
+            id="state"
+            name="state"
+            defaultValue={contact?.state}
+            placeholder={tf('optional')}
+          />
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="country">Country</Label>
+          <Label htmlFor="country">{tf('country')}</Label>
           <Input
             id="country"
             name="country"
             defaultValue={contact?.country}
-            placeholder="Country"
+            placeholder={tf('country')}
             required
           />
           {state.fieldErrors?.country && (
@@ -103,7 +116,7 @@ export const ContactForm = ({ mode, contact }: ContactFormProps) => {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="phone">Phone</Label>
+          <Label htmlFor="phone">{tf('phone')}</Label>
           <Input
             id="phone"
             name="phone"
@@ -118,19 +131,19 @@ export const ContactForm = ({ mode, contact }: ContactFormProps) => {
         </div>
 
         <div className="space-y-2 sm:col-span-2">
-          <Label htmlFor="notes">Notes</Label>
+          <Label htmlFor="notes">{tf('notes')}</Label>
           <Textarea
             id="notes"
             name="notes"
             defaultValue={contact?.notes}
-            placeholder="Optional notes about this contact..."
+            placeholder={tf('optional')}
             rows={3}
           />
         </div>
       </div>
 
       <div className="flex justify-end">
-        <SubmitButton>{mode === 'create' ? 'Create contact' : 'Save changes'}</SubmitButton>
+        <SubmitButton>{mode === 'create' ? tf('createContact') : tf('saveChanges')}</SubmitButton>
       </div>
     </form>
   );

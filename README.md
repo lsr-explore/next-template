@@ -2,6 +2,8 @@
 
 A production-ready Next.js template with a contact list app demonstrating Server Actions, role-based access, accessibility, and modern React 19 patterns.
 
+**Live demo:** [next-template-five-coral.vercel.app](https://next-template-five-coral.vercel.app/)
+
 ## Tech Stack
 
 | Category | Tool |
@@ -16,6 +18,7 @@ A production-ready Next.js template with a contact list app demonstrating Server
 | Component Dev | [Storybook](https://storybook.js.org) (with a11y addon) |
 | Logging | [Pino](https://getpino.io) (server-side) |
 | Observability | [OpenTelemetry](https://opentelemetry.io) via [@vercel/otel](https://vercel.com/docs/observability/otel-overview) |
+| i18n | [next-intl](https://next-intl.dev) (English + Spanish) |
 | Env Validation | [T3 Env](https://env.t3.gg) + [Zod](https://zod.dev) |
 | Type Safety | Strict TypeScript + [ts-reset](https://github.com/total-typescript/ts-reset) |
 | Bundle Analysis | [@next/bundle-analyzer](https://www.npmjs.com/package/@next/bundle-analyzer) |
@@ -61,26 +64,30 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Project Structure
 
 ```
+messages/               # i18n translation files (en.json, es.json)
 src/
   app/
-    page.tsx            # Landing page
-    layout.tsx          # Root layout with header + footer
-    error.tsx           # Global error boundary
-    not-found.tsx       # Global 404
-    login/              # Login page + form
-    contacts/           # Contact list, add, edit pages
+    layout.tsx          # Root layout (minimal wrapper)
+    [locale]/           # Locale-scoped routes (en, es)
+      layout.tsx        # Locale layout with header + footer + NextIntlClientProvider
+      page.tsx          # Landing page
+      error.tsx         # Global error boundary
+      not-found.tsx     # Global 404
+      login/            # Login page + form
+      contacts/         # Contact list, add, edit pages
     actions/            # Server Actions (auth, contacts)
   components/
-    layout/             # Header, footer, nav link
+    layout/             # Header, footer, nav link, language toggle
     contacts/           # Contact card, form, delete dialog, submit button
     ui/                 # Inline alert
     auth/               # Auth sync
+  i18n/                 # Internationalization config (routing, request, navigation)
   lib/                  # Utilities (logger, contact store, auth session, timezone)
   store/                # Zustand auth store
   types/                # TypeScript types (contact, auth)
   env.ts                # Type-safe environment variables (T3 Env)
   instrumentation.ts    # OpenTelemetry setup
-  proxy.ts              # Route protection (Next.js 16 proxy)
+  proxy.ts              # Route protection + i18n locale detection (Next.js 16 proxy)
   stories/              # Storybook example stories
 e2e/                    # Playwright end-to-end tests
 libs/
@@ -116,8 +123,9 @@ import { cn } from '@next-template/ui/lib/utils';
 | `pnpm e2e` | Run Playwright E2E tests |
 | `pnpm e2e:ui` | Playwright interactive UI mode |
 | `pnpm storybook` | Start Storybook on port 6006 |
+| `pnpm i18n:check` | Validate translation files (missing keys, invalid syntax) |
 | `pnpm analyze` | Build with bundle analyzer |
-| `pnpm check:all` | Run all quality checks (format, lint, typecheck, test) |
+| `pnpm check:all` | Run all quality checks (format, lint, i18n, typecheck, test) |
 
 ## Testing Strategy
 
@@ -157,11 +165,12 @@ Server Component (reads data) → Client Component (renders UI)
 
 ### Route Protection
 
-`proxy.ts` (Next.js 16's replacement for middleware) protects routes:
+`proxy.ts` (Next.js 16's replacement for middleware) handles locale detection and route protection:
 
-- `/contacts/*` requires authentication
-- `/contacts/new` and `/contacts/[id]/edit` require editor role
-- Unauthenticated users are redirected to `/login`
+- Locale detection via `next-intl` middleware — redirects to `/{locale}/` prefix
+- `/{locale}/contacts/*` requires authentication
+- `/{locale}/contacts/new` and `/{locale}/contacts/[id]/edit` require editor role
+- Unauthenticated users are redirected to `/{locale}/login`
 
 ## Linting Strategy
 
