@@ -82,7 +82,7 @@
   code: 'MODULE_UNPARSABLE'
 ```
 
-- [ ] Crash while editing [David Kim](http://localhost:3000/contacts/c6/edit) - NEEDS RESEARCH 
+- [ ] Crash while editing [David Kim](http://localhost:3000/contacts/c6/edit) - NEEDS RESEARCH
 
 ```js
  GET /contacts/c6/edit 200 in 154ms (next.js: 11ms, proxy.ts: 12ms, application-code: 131ms)

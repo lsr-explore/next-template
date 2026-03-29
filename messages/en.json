@@ -9,7 +9,6 @@
     "cancel": "Cancel",
     "delete": "Delete",
     "edit": "Edit",
-    "search": "Search",
     "notes": "Notes",
     "builtWith": "Built with Next.js",
     "dismissAlert": "Dismiss alert"
@@ -86,8 +85,6 @@
     "message": "Page not found"
   },
   "language": {
-    "label": "Language",
-    "en": "English",
-    "es": "Español"
+    "label": "Language"
   }
 }

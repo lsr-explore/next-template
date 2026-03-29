@@ -4,6 +4,7 @@ import { Alert } from '@next-template/ui/components/ui/alert';
 import { Button } from '@next-template/ui/components/ui/button';
 import { cn } from '@next-template/ui/lib/utils';
 import { CircleAlert, CircleCheck, Info, X } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 type AlertVariant = 'success' | 'error' | 'info';
@@ -33,6 +34,7 @@ const variantConfig: Record<AlertVariant, { icon: typeof Info; className: string
 };
 
 export const InlineAlert = ({ variant, message, className, onDismiss }: InlineAlertProps) => {
+  const tc = useTranslations('common');
   const [dismissed, setDismissed] = useState(false);
 
   if (dismissed) {
@@ -55,7 +57,7 @@ export const InlineAlert = ({ variant, message, className, onDismiss }: InlineAl
         variant="ghost"
         size="icon-xs"
         onClick={handleDismiss}
-        aria-label="Dismiss alert"
+        aria-label={tc('dismissAlert')}
         className="shrink-0"
       >
         <X className="size-3" />

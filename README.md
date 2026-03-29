@@ -123,8 +123,9 @@ import { cn } from '@next-template/ui/lib/utils';
 | `pnpm e2e` | Run Playwright E2E tests |
 | `pnpm e2e:ui` | Playwright interactive UI mode |
 | `pnpm storybook` | Start Storybook on port 6006 |
+| `pnpm i18n:check` | Validate translation files (missing keys, invalid syntax) |
 | `pnpm analyze` | Build with bundle analyzer |
-| `pnpm check:all` | Run all quality checks (format, lint, typecheck, test) |
+| `pnpm check:all` | Run all quality checks (format, lint, i18n, typecheck, test) |
 
 ## Testing Strategy
 
