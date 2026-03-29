@@ -64,14 +64,13 @@
 ## Accessibility
 
 - [ ] Delete button doesn't meet color contrast ratio threshold. WCAG 1.4.3 - READY FOR DEVELOPMENT
-- [ ] Search input field should have a label - READY FOR DEVELOPMENT
+- [ ] Search input field should have a visible `<label>` instead of aria-label. Keep placeholder text, remove the placeholder Search icon (redundant with the search icon button). - READY FOR DEVELOPMENT
 - [ ] Delete dialog should have an x in the top corner - READY FOR DEVELOPMENT
 
 ## Bugs
 
-- [ ] If user is already signed in, the Sign in button shouldn't be visible - READY FOR DEVELOPMENT
-- [ ] if the user is not signed in, they shouldn't have the button View Contacts - READY FOR DEVELOPMENT
-- [ ] Banner should display if on the contacts page when a contact has been updated - READY FOR DEVELOPMENT
+- [ ] Home page hero should show a single button: "Sign in" when unauthenticated, "View contacts" when authenticated - READY FOR DEVELOPMENT
+- [ ] Success banner on contacts page after a contact is updated. Use InlineAlert (not a toast). Dismiss on: dismiss button click, or any user action (search, expand notes, edit, delete, etc.) - READY FOR DEVELOPMENT
 
 - [ ] Crash while in editor view of contacts - NEEDS RESEARCH
 
